@@ -4,12 +4,16 @@ from Queue import Queue
 FILE = os.environ.get("FILE", "data.csv")
 
 
+LOG_INFO = True
+
+
 def log(msg):
     print msg
 
 
 def info(msg):
-    log('[INFO] '+msg)
+    if LOG_INFO:
+        log('[INFO] '+msg)
 
 
 def error(msg):
@@ -147,7 +151,6 @@ class Trie(object):
             if index == n and node.is_word:
                 parent_level += 1
                 results.append((term, parent_level))
-            print 50, parent_level
             Trie.populate_children_words_bfs(
                 node, results, pre=term[:index], max_count=count, parent_level_smaller_words_count=parent_level
             )
